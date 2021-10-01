@@ -1,0 +1,56 @@
+﻿@model Yamool.Nop.Plugin.ThemeSwitcha.Models.ThemeSwitchaListModel
+@inject Nop.Core.IWebHelper webHelper
+
+@{
+    var returnUrl = webHelper.GetRawUrl(Context.Request);
+    Html.AppendCssFileParts("~/Plugins/Yamool.Plugin.ThemeSwitcha/Content/styles.css", excludeFromBundle: true);
+}
+
+<div class="theme-switcha">
+    <a class="theme-switcha__back-link" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+        </svg> <span>Back default theme</span>
+    </a>
+    <div class="theme-switcha__selector">
+        <span class="theme-switcha__theme">@(Model.ActiveTheme.FriendlyName)</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+        </svg>
+        <div class="theme-switcha__themes">
+            @foreach (var theme in Model.Themes)
+            {
+                <div class="theme-switcha-card @(theme.SystemName == Model.ActiveTheme.SystemName?"active":null)">
+                    <a asp-controller="ThemeSwitcha" asp-action="Switch" asp-route-theme="@theme.SystemName" asp-route-returnUrl="@returnUrl">
+                        <div class="theme-switcha-card__image">
+                            <img src="@Url.Content(theme.PreviewImageUrl)" />
+                        </div>
+                        <div class="theme-switcha-card__title">
+                            @theme.FriendlyName <svg class="icon-check-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"></path></svg>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@if (!Model.ActiveTheme.IsDefault)
+{
+    <script asp-location="Footer">
+    var links = document.querySelectorAll("a[href]");
+    for (var i = 0; i < links.length; i++) {
+        let link = links[i];
+        let url = new URL(link.getAttribute("href"), window.location.href);
+        if ((url.hostname == window.location.hostname)) {
+            var href = link.getAttribute("href");
+            var querys = Array.from(url.searchParams);
+            if (querys.length == 0) {
+                href = href + "?theme_preview=@Model.ActiveTheme.SystemName";
+            } else if (!url.searchParams.has("theme_preview")) {
+                href = href + "&theme_preview=@Model.ActiveTheme.SystemName";
+            }
+            link.setAttribute("href", href);
+        }
+    }
+    </script>
+}

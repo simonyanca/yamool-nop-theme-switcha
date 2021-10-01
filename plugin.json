@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Yamool",
+  "FriendlyName": "Yamool Theme Switcha",
+  "SystemName": "Yamool.ThemeSwitcha",
+  "Version": "1.0",
+  "SupportedVersions": [ "4.00", "4.10", "4.20", "4.30", "4.40" ],
+  "Author": "yamool.com",
+  "DisplayOrder": 1,
+  "FileName": "Yamool.Nop.Plugin.ThemeSwitcha.dll",
+  "Description": "Theme switch plugin that allows users easy to test and develop themes while visitors continue to use your default theme."
+}
