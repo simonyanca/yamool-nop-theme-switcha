@@ -7,11 +7,6 @@
 }
 
 <div class="theme-switcha">
-    <a class="theme-switcha__back-link" href="/">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-        </svg> <span>Back default theme</span>
-    </a>
     <div class="theme-switcha__selector">
         <span class="theme-switcha__theme">@(Model.ActiveTheme.FriendlyName)</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -34,23 +29,3 @@
         </div>
     </div>
 </div>
-@if (!Model.ActiveTheme.IsDefault)
-{
-    <script asp-location="Footer">
-    var links = document.querySelectorAll("a[href]");
-    for (var i = 0; i < links.length; i++) {
-        let link = links[i];
-        let url = new URL(link.getAttribute("href"), window.location.href);
-        if ((url.hostname == window.location.hostname)) {
-            var href = link.getAttribute("href");
-            var querys = Array.from(url.searchParams);
-            if (querys.length == 0) {
-                href = href + "?theme_preview=@Model.ActiveTheme.SystemName";
-            } else if (!url.searchParams.has("theme_preview")) {
-                href = href + "&theme_preview=@Model.ActiveTheme.SystemName";
-            }
-            link.setAttribute("href", href);
-        }
-    }
-    </script>
-}

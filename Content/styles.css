@@ -9,30 +9,6 @@
   align-items: center;
 }
 
-.theme-switcha__back-link {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  display:none;
-  color: #474747;
-  font-size: 12px;
-}
-
-  .theme-switcha__back-link svg {
-    width: 12px;
-    margin-right: 4px;
-    fill: #474747;
-  }
-
-@media (min-width: 768px) {
-  .theme-switcha__back-link {
-    display:flex;
-    align-items:center;
-  }
-}
-
-
 .theme-switcha__selector {
   display: flex;
   align-items: center;
@@ -106,11 +82,11 @@
     display: inline-block;
   }
 
-  .theme-switcha-card a:hover .theme-card-image img {
+  .theme-switcha-card a:hover .theme-switcha-card__image img {
     opacity: .85;
   }
 
-  .theme-switcha-card a:hover .theme-card-name {
+  .theme-switcha-card a:hover .theme-switcha-card__title {
     text-decoration: underline;
   }
 
