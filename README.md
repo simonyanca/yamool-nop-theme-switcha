@@ -21,3 +21,7 @@ Theme Switcha is a free and open source nopCommerce plugin, that makes it easy t
 2. After enable the plugin, back to the store homepage.
 4. At the top of the page, click on any theme thumbnail to switch to that theme
 5. You can also switch themes by the specified link, like: https://example.com/?theme_preview={theme}
+
+### Screenshots
+
+![1](https://github.com/yamoolcom/yamool-nop-theme-switcha/raw/master/feature-1.jpg)
